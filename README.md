@@ -4,3 +4,4 @@ This project is under development, and it's includes list of usefull codes for M
 
 Outline:
 * AIcouse - jupyter notebook for simple NN
+* GraphNeuralNetwork - implementation of GNN for [TrackML](https://competitions.codalab.org/competitions/20112) challenge
