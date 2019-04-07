@@ -23,6 +23,8 @@ GNN inputs are list of points (hits), and list of connections (edges). Not all h
 
 At the pre-processing stage, good pairs of points (segments) are selected. The selection criteria was set to:
 * $$z_0$$ cut of 100 mm
+- <img src="https://latex.codecogs.com/gif.latex?P(s | O_t )=\text { Probability of a sensor reading value when sleep onset is observed at a time bin } t " />
+
 * $\rho$ cut of 250mm. 
 
 $\rho$ is the radius of a charge particle in a magnetic field $X-Y$ plane originating at the origin. The radius is related to the particle transverse momentum by $\rho = \frac{p_{T} [GeV]}{0.6 \times B[T]}$
