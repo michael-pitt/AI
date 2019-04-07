@@ -25,9 +25,13 @@ At the pre-processing stage, good pairs of points (segments) are selected. The s
 * z<sub>0</sub> cut of 100 mm
 * &rho; cut of 250mm. 
 
-&rho; is the radius of a charge particle in a magnetic field X-Y plane originating at the origin. The radius is related to the particle transverse momentum by &rho;= p<sub>T</sub>[GeV]/(0.6xB[T])
+&rho; is the radius of a charge particle in a magnetic field in X-Y plane originating from the origin. The radius is related to the particle transverse momentum by &rho;= p<sub>T</sub>[GeV]/(0.3&times;B[T])
+
+For the training, the [TrackML](https://competitions.codalab.org/competitions/20112) data was preprocessed, and stored as an `npz` files. Generation of the input data for the DNN training can be found in 
 
 ### PreEvaluation
+
+After selection of goof pair was done, based on physical cuts, further selection of edges used with DNN model. The DNN has the following structure: 
 
 ### GNN
 
