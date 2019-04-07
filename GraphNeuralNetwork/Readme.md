@@ -22,12 +22,10 @@ GNN inputs are list of points (hits), and list of connections (edges). Not all h
 ### Preprocessing
 
 At the pre-processing stage, good pairs of points (segments) are selected. The selection criteria was set to:
-* $$z_0$$ cut of 100 mm
-* h<sub>&theta;</sub>(x) = &theta;<sub>o</sub> x + &theta;<sub>1</sub>x
+* z<sub>0;</sub> cut of 100 mm
+* &rho cut of 250mm. 
 
-* $\rho$ cut of 250mm. 
-
-$\rho$ is the radius of a charge particle in a magnetic field $X-Y$ plane originating at the origin. The radius is related to the particle transverse momentum by $\rho = \frac{p_{T} [GeV]}{0.6 \times B[T]}$
+&rho is the radius of a charge particle in a magnetic field X-Y plane originating at the origin. The radius is related to the particle transverse momentum by $\rho = \frac{p_{T} [GeV]}{0.6 \times B[T]}$
 
 ### PreEvaluation
 
