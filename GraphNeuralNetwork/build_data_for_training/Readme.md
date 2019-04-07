@@ -13,3 +13,5 @@ ssh -N -f -L localhost:7008:localhost:8888 user@adress.of.the.cluster
 ```
 
 then in a browser open: `http://localhost:7008/XXXXXXXXXX`
+
+run the [save_events_to_files](../notebooks/save_events_to_files.ipynb) notebook
