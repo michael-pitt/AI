@@ -9,13 +9,27 @@ The input data is a set of points in 3D space that represent interation betwen p
 
 ## Algorithm
 
-GNN inputs are list of points (hits), and list of connections (edges). Not all hits are connected with each other, there is  to increase evaluation time. The algorithm is based on 4 steps:
+GNN inputs are list of points (hits), and list of connections (edges). Not all hits are connected with each other. The code uses pytorch sprase matrices. The algorithm is based on 4 steps:
+
 1. Preprocessing: Identification of good pair of hits (edges based on track selection criteria), code that based only on this section can be found in [submit_preprocessed_data](submit_preprocessed_data) folder
-2. step 2
-3. step 3
-4. step 4
+
+2. Evaluation of good pairs based on DNN. The DNN is explained in [Pre-Evaluation](#preevaluation) section.
+
+3. Evaluation of good paris based on [GraphNN](#gnn)
+
+4. Reconstruction of tracks based on the edges
 
 ### Preprocessing
+
+At the pre-processing stage, good pairs of points (segments) are selected. The selection criteria was set to:
+* $z_0$ cut of 100 mm
+* $\rho$ cut of 250mm. 
+
+$\rho$ is the radius of a charge particle in a magnetic field $X-Y$ plane originating at the origin. The radius is related to the particle transverse momentum by $\rho = \frac{p_{T} [GeV]}{0.6 \times B[T]}$
+
+### PreEvaluation
+
+### GNN
 
 
 
