@@ -23,7 +23,7 @@ GNN inputs are list of points (hits), and list of connections (edges). Not all h
 
 At the pre-processing stage, good pairs of points (segments) are selected. The selection criteria was set to:
 * $$z_0$$ cut of 100 mm
-- <img src="https://latex.codecogs.com/gif.latex?P(s | O_t )=\text { Probability of a sensor reading value when sleep onset is observed at a time bin } t " />
+* h<sub>&theta;</sub>(x) = &theta;<sub>o</sub> x + &theta;<sub>1</sub>x
 
 * $\rho$ cut of 250mm. 
 
