@@ -1,15 +1,16 @@
 # GNN for particle track finding
 
-This project, utilize the Graph Neural Network (GNN) for a particle track finding task.
-The input data is a set of points in 3D space that represent interation betwen particles and detector. The data is taken from the [TrackML](https://competitions.codalab.org/competitions/20112) challenge.
+This project, utilize the Graph Neural Network (GNN) for a task of particle track finding.
+The input data is a set of points in 3D space that represent the interaction between particles and detector. The information is taken from the [TrackML](https://competitions.codalab.org/competitions/20112) challenge.
 
 ## content:
 * **[WeizmannAI](#algorithm)** - this folder contains the DNN model used for training and evaluation of the data.
 * **[submit_preprocessed_data](#preprocessing)**  - folder used to preprocess all data, and retrive pairs of hits that can be used later by the DNN model.
+* **[sample_code_submission](sample_code_submission)** - folder used to evaluate GNN model. This folder calculate track reconstruction accuracy only for barrel tracks with more than 10 hits.
 
 ## Algorithm
 
-GNN inputs are list of points (hits), and list of connections (edges). Not all hits are connected with each other. The code uses pytorch sprase matrices. The algorithm is based on 4 steps:
+GNN inputs are a list of points (hits), and list of connections (edges). Not all hits are connected. The code uses pytorch sprase matrices. The algorithm is based on four steps:
 
 1. Preprocessing: Identification of good pair of hits (edges based on track selection criteria), code that based only on this section can be found in [submit_preprocessed_data](submit_preprocessed_data) folder
 
@@ -21,25 +22,29 @@ GNN inputs are list of points (hits), and list of connections (edges). Not all h
 
 ### Preprocessing
 
-At the pre-processing stage, good pairs of points (segments) are selected. The selection criteria was set to:
+At the pre-processing stage, good pairs of points (segments) are selected. The selection criteria were set to:
 * z<sub>0</sub> cut of 100 mm
 * &rho; cut of 250mm. 
 
-&rho; is the radius of a charge particle in a magnetic field in X-Y plane originating from the origin. The radius is related to the particle transverse momentum by &rho;= p<sub>T</sub>[GeV]/(0.3&times;B[T])
+&rho; is the radius of a charged particle in a magnetic field in X-Y plane originating from the origin. The radius is related to the particle transverse momentum by &rho;= p<sub>T</sub>[GeV]/(0.3&times;B[T])
 
 For the training, the [TrackML](https://competitions.codalab.org/competitions/20112) data was preprocessed, and stored as an `npz` files. Generation of the input data for the DNN training can be found in [save_events_to_files.ipynb](../notebooks/save_events_to_files.ipynb)
 
 ### PreEvaluation
 
-After selection of goof pair was done, based on physical cuts, further selection of edges used with DNN model. The DNN has the following structure: 
+After the selection of good pairs (based on physical cuts), further selection of edges evaluated using a DNN model. The DNN has the following structure: 
 
 ![PreTrainModel](WeizmannAI/images/PreTrainModel.png?raw=true "PreTrainModel: for edge pre-estimation")
 
+The output of the model is a list of edge weights which used to discriminate bad edges and reduce the input data size (the efficiency of a cut of &omega;&gt;0.2 found to be 98.5%)
+
 ### GNN
 
-The Graph NN can be found in [WeizmannAI](WeizmannAI/) folder. The model contain two nets:
+The Graph NN can be found in [WeizmannAI](WeizmannAI/) folder. 
+
+The model contains two nets:
 - Edge representation: Input parameters of each edge are processed to obtain new representation
-- Message propogation: Edge weight is evaluated as following - Each edge + weighted neighbour edges are fed into NN to evaluate new edge weight:
+- Message propagation: Edge weight is evaluated as following - Each edge + weighted neighbor edges are fed into NN to estimate new edge weight:
 
 ![GNN_model](WeizmannAI/images/GNN_model.png?raw=true "GNN_model: for edge classification")
 
