@@ -12,4 +12,4 @@ in a new shell open a tunnel
 ssh -N -f -L localhost:7008:localhost:8888 user@adress.of.the.cluster
 ```
 
-then in a browser run open: `http://localhost:7008/XXXXXXXXXX`
+then in a browser open: `http://localhost:7008/XXXXXXXXXX`
