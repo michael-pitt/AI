@@ -37,6 +37,12 @@ After selection of goof pair was done, based on physical cuts, further selection
 
 ### GNN
 
+The Graph NN can be found in [WeizmannAI](WeizmannAI/) folder. The model contain two nets:
+- Edge representation: Input parameters of each edge are processed to obtain new representation
+- Message propogation: Edge weight is evaluated as following - Each edge + weighted neighbour edges are fed into NN to evaluate new edge weight:
+
+![GNN_model](WeizmannAI/images/GNN_model.png?raw=true "GNN_model: for edge classification")
+
 
 
 
