@@ -3,6 +3,8 @@
 This project, utilize the Graph Neural Network (GNN) for a task of particle track finding.
 The input data is a set of points in 3D space that represent the interaction between particles and detector. The information is taken from the [TrackML](https://competitions.codalab.org/competitions/20112) challenge.
 
+Inspired by https://github.com/HEPTrkX/heptrkx-gnn-tracking
+
 ## content:
 * **[WeizmannAI](#algorithm)** - this folder contains the DNN model used for training and evaluation of the data.
 * **[submit_preprocessed_data](#preprocessing)**  - folder used to preprocess all data, and retrive pairs of hits that can be used later by the DNN model.
