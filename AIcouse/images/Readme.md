@@ -3,7 +3,8 @@
 Please see the tutorial slides for more details under:
 
 
-| Command | Description |
+| Date | Lecture |
 | --- | --- |
+| ... | ... |
 | git status | List all new or modified files |
 | git diff | Show file differences that haven't been staged |
