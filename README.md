@@ -1,4 +1,4 @@
-# project AI
+# :construction: project AI
 
 This project is under development, and it includes a list of useful codes for ML tasks. Besides, it contains several notebooks used to exercise the basics of ML.
 
