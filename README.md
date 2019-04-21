@@ -1,6 +1,7 @@
 # project AI
 
-:construction::construction::construction::construction::construction::construction::construction: Under development :construction::construction::construction::construction::construction::construction::construction:
+:construction::construction::construction::construction::construction::construction::construction: *Under development* :construction::construction::construction::construction::construction::construction::construction:
+
 This project includes a list of useful codes for ML tasks. Besides, it contains several notebooks used to exercise the basics of ML.
 
 Outline:
