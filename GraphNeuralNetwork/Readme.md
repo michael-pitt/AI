@@ -30,7 +30,7 @@ At the pre-processing stage, good pairs of points (segments) are selected. The s
 
 &rho; is the radius of a charged particle in a magnetic field in X-Y plane originating from the origin. The radius is related to the particle transverse momentum by &rho;= p<sub>T</sub>[GeV]/(0.3&times;B[T])
 
-For the training, the [TrackML](https://competitions.codalab.org/competitions/20112) data was preprocessed, and stored as an `npz` files. Generation of the input data for the DNN training can be found in [save_events_to_files.ipynb](../notebooks/save_events_to_files.ipynb)
+For the training, the [TrackML](https://competitions.codalab.org/competitions/20112) data was preprocessed, and stored as an `npz` files. Generation of the input data for the DNN training can be found in [save_events_to_files.ipynb](https://nbviewer.jupyter.org/github/mpitt82/AI/blob/master/GraphNeuralNetwork/notebooks/save_events_to_files.ipynb)
 
 ### PreEvaluation
 
