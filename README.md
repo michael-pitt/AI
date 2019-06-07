@@ -14,21 +14,5 @@ This folder includes few Jupyter notebooks with examples for linear and logistic
 ## GraphNeuralNetwork
 This folder contains GNN implementation.
 
-### Installing the package:
-
-To setup the package, in lxplus, do the following:
-```bash
-mkdir source build; cd source
-asetup AnalysisBase,21.2.56,here
-cd $TestArea/../build
-cmake ../source
-make -j4
-source $TestArea/../build/$AnalysisBase_PLATFORM/setup.sh
-```
-Each time you come back, run:
-```bash
-cd source; asetup
-source $TestArea/../build/$AnalysisBase_PLATFORM/setup.sh
-```
 
 
