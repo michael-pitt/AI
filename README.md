@@ -13,3 +13,7 @@ This folder includes few Jupyter notebooks with examples for linear and logistic
 
 ## GraphNeuralNetwork
 This folder contains GNN implementation.
+
+Test
+`mkdir source`
+
