@@ -17,3 +17,8 @@ This folder contains GNN implementation.
 Test
 `mkdir source`
 
+```javascript
+var s = "JavaScript syntax highlighting";
+alert(s);
+```
+
