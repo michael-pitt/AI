@@ -4,7 +4,7 @@
 
 This project includes a list of useful codes for ML tasks. Besides, it contains several notebooks used to exercise the basics of ML.
 
-Outline:
+## Outline:
 * **[AIcouse](#aicourse)** - jupyter notebook for simple NN
 * **[GraphNeuralNetwork](#graphneuralnetwork)** - implementation of GNN for [TrackML](https://competitions.codalab.org/competitions/20112) challenge
 * **[SuperResolution](#superresolution)** - Super Resolution (SR) tasks in particle detectors. Implementation of Super resolution for the task of neutral energy regression in calorimeter based particle detector.
