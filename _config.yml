@@ -12,3 +12,5 @@ plugins:
  - jemoji
  - jekyll-mentions
  - jekyll-include-cache
+
+theme: jekyll-theme-dinky
