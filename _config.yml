@@ -1,7 +1,18 @@
 title: project AI
 description: This repository holds few Machine Learning projects
 
-#theme: jekyll-theme-dinky
+# Enable or disable the site search
+search_enabled: true
+
+# Enable or disable heading anchors
+heading_anchors: true
+
+# Aux links for the upper right navigation
+aux_links:
+  "Just the Docs on GitHub":
+    - "//github.com/pmarsceill/just-the-docs"
+    
+theme: jekyll-theme-dinky
 plugins:
  - jekyll-feed
  - jekyll-redirect-from
