@@ -1,6 +1,6 @@
 # project AI
 
-:construction: **Under development** :construction:
+:construction: **<font color="red"> NOTE </font>:This project is under development** :construction:
 
 This project includes a list of useful codes for ML tasks. Besides, it contains several notebooks used to exercise the basics of ML.
 
