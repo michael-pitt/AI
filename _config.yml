@@ -1,4 +1,7 @@
-theme: jekyll-theme-dinky
+title: project AI
+description: This repository holds few Machine Learning projects
+
+#theme: jekyll-theme-dinky
 plugins:
  - jekyll-feed
  - jekyll-redirect-from
