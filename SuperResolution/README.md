@@ -13,4 +13,7 @@ To download only this folder (clone a subdirectory from git repository) exetute 
 git clone --depth 1 https://USERNAME:PASSWORD@github.com/mpitt82/AI.git SuperResolution
 cd SuperResolution
 git filter-branch --prune-empty --subdirectory-filter SuperResolution HEAD
+#to update the package
+git pull --depth=1 origin master
 ```
+
