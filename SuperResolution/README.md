@@ -5,3 +5,12 @@ This folder contains an implementation of Super-Resolution task on images obtain
 The detector images obtained a simplified version of Geant4 based ATLAS detector simulation ([mpitt82/Geant4-models/ATLAS-simplified](https://github.com/mpitt82/Geant4-models/tree/master/ATLAS-simplified)). 
 
 Example of a few simulation outputs can be found in [link].
+
+# Download 
+
+To download the specific folder exetute the following lines:
+```bash
+git clone --depth 1 https://USERNAME:PASSWORD@github.com/mpitt82/AI.git SuperResolution
+cd SuperResolution
+git filter-branch --prune-empty --subdirectory-filter SuperResolution HEAD
+```
