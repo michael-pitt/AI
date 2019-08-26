@@ -10,10 +10,10 @@ Example of a few simulation outputs can be found in [link].
 
 To download only this folder (clone a subdirectory from git repository) exetute the following lines:
 ```bash
-git clone --depth 1 https://USERNAME:PASSWORD@github.com/mpitt82/AI.git SuperResolution
-cd SuperResolution
-git filter-branch --prune-empty --subdirectory-filter SuperResolution HEAD
-#to update the package
+git init
+git remote add origin https://USERNAME:PASSWORD@github.com/mpitt82/AI.git
+git config core.sparsecheckout true
+echo "SuperResolution/*" > .git/info/sparse-checkout
 git pull --depth=1 origin master
 ```
 
