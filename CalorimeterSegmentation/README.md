@@ -1,10 +1,10 @@
 # CalorimeterSegmentation
-This folder contains an implementation of segmintation of calorimeter cells.
+This folder contains an implementation of segmentation of calorimeter cells.
 
-In particle callorimetry, segmintation of cell hits with respect to different particle types plays a crussial role in various tasks:
-measurement of the energy of jets, particle identification and localization. 
-A few simple approaches are tested here to separate neutral pion from charged pion hits in the detector.
-The detector hits are simulated using Geant4 simulation package with [ATLAS-simplified](https://mpitt82.github.io/Geant4-models/ATLAS-simplified) geometry (sampling callorimeter that comprises EM and Had layers).
+In particle calorimetry, segmentation of cell hits concerning different particle types plays a crucial role in various tasks:
+ measurement of the energy of jets, particle identification, and localization. 
+A few simple approaches are tested here to separate neutral pion from charged pion hits in the detector. 
+The detector hits are simulated using Geant4 simulation package with [ATLAS-simplified](https://mpitt82.github.io/Geant4-models/ATLAS-simplified) geometry (sampling calorimeter that comprises EM and Had layers).
 
 Example of a few simulation outputs can be found in [ATLAS-simplified@cernbox](https://cernbox.cern.ch/index.php/s/oCg3en1GHAvYSTo).
 
