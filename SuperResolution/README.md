@@ -8,7 +8,7 @@ Example of a few simulation outputs can be found in [link].
 
 # Download 
 
-To download the specific folder exetute the following lines:
+To download only this folder (clone a subdirectory from git repository) exetute the following lines:
 ```bash
 git clone --depth 1 https://USERNAME:PASSWORD@github.com/mpitt82/AI.git SuperResolution
 cd SuperResolution
