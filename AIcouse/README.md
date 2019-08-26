@@ -8,6 +8,7 @@ This folder contains few Jupyter notebooks with examples of Machine Leanring tas
 
 ### Advanced examples
 * [GaussianProcess](GaussianProcess.ipynb): Gaussian Process Regression (GPR) using GPy package
+
 ...
 
 
