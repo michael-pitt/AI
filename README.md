@@ -10,7 +10,9 @@ git clone https://USERNAME:PASSWORD@github.com/mpitt82/AI.git
 ```
 * Cloning a single folder
 ```bash
-git clone https://USERNAME:PASSWORD@github.com/mpitt82/AI.git
+git clone --depth 1 https://USERNAME:PASSWORD@github.com/mpitt82/AI.git [FOLDER]
+cd [FOLDER]
+git filter-branch --prune-empty --subdirectory-filter [FOLDER] HEAD
 ```
 
 ## Outline:
