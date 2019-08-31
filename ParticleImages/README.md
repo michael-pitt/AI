@@ -45,4 +45,4 @@ The detector images obtained a simplified version of Geant4 based ATLAS detector
 
 Example of a few simulation outputs can be found in [link].
 
-:point_up_2: [TOP](#outline)
+[:arrow_up: TOP](#outline)
