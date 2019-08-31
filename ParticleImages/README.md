@@ -1,4 +1,4 @@
-[:arrow_backward: BACK :arrow_backward:](../)
+[:arrow_backward: BACK :arrow_backward:](../README.md)
 
 # ParticleImages
 The "Particle Images" project is used to implement different characterization tasks from calorimeter images.
