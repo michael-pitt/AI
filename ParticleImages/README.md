@@ -1,4 +1,4 @@
-[:arrow_backward: BACK :arrow_backward:](AI)
+[:arrow_backward: BACK :arrow_backward:](mpitt82/AI)
 
 # ParticleImages
 The "Particle Images" project is used to implement different characterization tasks from calorimeter images.
