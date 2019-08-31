@@ -25,6 +25,7 @@ as well as the detector's energy response. A typical image obtained from all six
 
 ![Figure 1: Calorimeter image](images/Event_200_cells.png)
 
+[TOP](#outline)
 # CalorimeterSegmentation
 This folder contains an implementation of segmentation of calorimeter cells.
 
@@ -35,6 +36,7 @@ The detector hits are simulated using Geant4 simulation package with [ATLAS-simp
 
 Example of a few simulation outputs can be found in [ATLAS-simplified@cernbox](https://cernbox.cern.ch/index.php/s/oCg3en1GHAvYSTo).
 
+[TOP](#outline)
 # SuperResolution
 This folder contains an implementation of Super-Resolution task on images obtained form particle detectors. In contrast to computer vision tasks, particle detectors are 3D cameras incorporates different sensitive layers designed to stop particles that usually undergo two types of interactions, electromagnetic and hadronic. Often, all layers have different granularity and include various types of the response function, which make the task of super-resolution to be different from the mainstream computer vision tasks.
 
@@ -42,3 +44,5 @@ This folder contains an implementation of Super-Resolution task on images obtain
 The detector images obtained a simplified version of Geant4 based ATLAS detector simulation ([mpitt82/Geant4-models/ATLAS-simplified](https://github.com/mpitt82/Geant4-models/tree/master/ATLAS-simplified)). 
 
 Example of a few simulation outputs can be found in [link].
+
+[TOP](#outline)
