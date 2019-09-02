@@ -82,12 +82,18 @@ def DrawEvent(event, cellNu_Energy, cellCh_Energy):
     fig.savefig('images/Event_' + str(event) + '_cells.png')
     plt.show()
     
-def DrawEventSR(data_generator, event_number):
+def DrawEventSR(data_generator, event_number, model = None):
 
     imageLR, imageHR = data_generator[event_number]
     
-    fig, ax = plt.subplots(6, 2, figsize=(25, 60))
+    nimage = 2
     Title = ['LR image', 'HR image',]
+    if model:
+        imageHRbar = model(torch.FloatTensor(imageLR).to(device)).cpu().detach().numpy()
+        nimage = 3
+        Title.append('SR image')
+    
+    fig, ax = plt.subplots(6, nimage, figsize=(10*nimage, 60))
     LayerNames=['ECAL1','ECAL2','ECAL3','HCAL1','HCAL2','HCAL3']
 
     for layer_i in range(6):
@@ -102,13 +108,18 @@ def DrawEventSR(data_generator, event_number):
         minor_ticks = np.arange(-0.5, 63.5, 1)
 
         ax[layer_i][0].set_ylabel(LayerNames[layer_i],fontsize=64)
-        for ipad in range(2) : 
+        for ipad in range(nimage) : 
             ax[layer_i][ipad].set_xticks(minor_ticks, minor=True)
             ax[layer_i][ipad].set_yticks(minor_ticks, minor=True)
             ax[layer_i][ipad].grid(which='minor')
             ax[0][ipad].set_title(Title[ipad]+' ' , fontsize=48)     
-        ax[layer_i][0].text(5,5,'E = %2.2f GeV'%(LR_image.sum()/1e3),fontsize=64,bbox={'facecolor': 'white'})
-        ax[layer_i][1].text(5,5,'E = %2.2f GeV'%(HR_image.sum()/1e3),fontsize=64,bbox={'facecolor': 'white'})
+        ax[layer_i][0].text(5,5,'E = %2.2f GeV'%(LR_image.sum()/1e3),fontsize=32,bbox={'facecolor': 'white'})
+        ax[layer_i][1].text(5,5,'E = %2.2f GeV'%(HR_image.sum()/1e3),fontsize=32,bbox={'facecolor': 'white'})
+        
+        if model:
+            SR_image = imageHRbar[0][layer_i]
+            ax[layer_i][2].imshow( SR_image, cmap='plasma', vmin=0.001, vmax=10.8 )
+            ax[layer_i][2].text(5,5,'E = %2.2f GeV'%(SR_image.sum()/1e3),fontsize=32,bbox={'facecolor': 'white'})
 
     plt.tight_layout()
     fig.savefig('images/SR_ev_' + str(event_number) + '.pdf')
