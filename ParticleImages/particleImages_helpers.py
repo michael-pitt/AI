@@ -81,4 +81,37 @@ def DrawEvent(event, cellNu_Energy, cellCh_Energy):
     fig.savefig('images/Event_' + str(event) + '_cells.pdf')
     fig.savefig('images/Event_' + str(event) + '_cells.png')
     plt.show()
+    
+def DrawEventSR(data_generator, event_number):
+
+    imageLR, imageHR = data_generator[event_number]
+    
+    fig, ax = plt.subplots(6, 2, figsize=(25, 60))
+    Title = ['LR image', 'HR image',]
+    LayerNames=['ECAL1','ECAL2','ECAL3','HCAL1','HCAL2','HCAL3']
+
+    for layer_i in range(6):
+
+        LR_image = imageLR[0][layer_i]
+        HR_image = imageHR[0][layer_i]
+
+        ax[layer_i][0].imshow( LR_image, cmap='plasma', vmin=0.001, vmax=10.8 )
+        ax[layer_i][1].imshow( HR_image, cmap='plasma', vmin=0.001, vmax=10.8 )
+
+        major_ticks = np.arange(-0.5, 63.5, 1)
+        minor_ticks = np.arange(-0.5, 63.5, 1)
+
+        ax[layer_i][0].set_ylabel(LayerNames[layer_i],fontsize=64)
+        for ipad in range(2) : 
+            ax[layer_i][ipad].set_xticks(minor_ticks, minor=True)
+            ax[layer_i][ipad].set_yticks(minor_ticks, minor=True)
+            ax[layer_i][ipad].grid(which='minor')
+            ax[0][ipad].set_title(Title[ipad]+' ' , fontsize=48)     
+        ax[layer_i][0].text(5,5,'E = %2.2f GeV'%(LR_image.sum()/1e3),fontsize=64,bbox={'facecolor': 'white'})
+        ax[layer_i][1].text(5,5,'E = %2.2f GeV'%(HR_image.sum()/1e3),fontsize=64,bbox={'facecolor': 'white'})
+
+    plt.tight_layout()
+    fig.savefig('images/SR_ev_' + str(event_number) + '.pdf')
+    fig.savefig('images/SR_ev_' + str(event_number) + '.png')
+    plt.show()
 	
