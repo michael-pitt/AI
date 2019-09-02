@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import torch
 
 
 def printProgressBar (iteration, total, loss = '', decimals = 1, length = 50):
@@ -82,7 +83,7 @@ def DrawEvent(event, cellNu_Energy, cellCh_Energy):
     fig.savefig('images/Event_' + str(event) + '_cells.png')
     plt.show()
     
-def DrawEventSR(data_generator, event_number, model = None):
+def DrawEventSR(data_generator, event_number, model = None, device = torch.device("cpu")):
 
     imageLR, imageHR = data_generator[event_number]
     
@@ -93,7 +94,7 @@ def DrawEventSR(data_generator, event_number, model = None):
         nimage = 3
         Title.append('SR image')
     
-    fig, ax = plt.subplots(6, nimage, figsize=(10*nimage, 60))
+    fig, ax = plt.subplots(6, nimage, figsize=(5*nimage, 30))
     LayerNames=['ECAL1','ECAL2','ECAL3','HCAL1','HCAL2','HCAL3']
 
     for layer_i in range(6):
@@ -107,19 +108,19 @@ def DrawEventSR(data_generator, event_number, model = None):
         major_ticks = np.arange(-0.5, 63.5, 1)
         minor_ticks = np.arange(-0.5, 63.5, 1)
 
-        ax[layer_i][0].set_ylabel(LayerNames[layer_i],fontsize=64)
+        ax[layer_i][0].set_ylabel(LayerNames[layer_i],fontsize=26)
         for ipad in range(nimage) : 
             ax[layer_i][ipad].set_xticks(minor_ticks, minor=True)
             ax[layer_i][ipad].set_yticks(minor_ticks, minor=True)
             ax[layer_i][ipad].grid(which='minor')
-            ax[0][ipad].set_title(Title[ipad]+' ' , fontsize=48)     
-        ax[layer_i][0].text(5,5,'E = %2.2f GeV'%(LR_image.sum()/1e3),fontsize=32,bbox={'facecolor': 'white'})
-        ax[layer_i][1].text(5,5,'E = %2.2f GeV'%(HR_image.sum()/1e3),fontsize=32,bbox={'facecolor': 'white'})
+            ax[0][ipad].set_title(Title[ipad]+' ' , fontsize=20)     
+        ax[layer_i][0].text(5,5,'E = %2.2f GeV'%(LR_image.sum()/1e3),fontsize=26,bbox={'facecolor': 'white'})
+        ax[layer_i][1].text(5,5,'E = %2.2f GeV'%(HR_image.sum()/1e3),fontsize=26,bbox={'facecolor': 'white'})
         
         if model:
             SR_image = imageHRbar[0][layer_i]
             ax[layer_i][2].imshow( SR_image, cmap='plasma', vmin=0.001, vmax=10.8 )
-            ax[layer_i][2].text(5,5,'E = %2.2f GeV'%(SR_image.sum()/1e3),fontsize=32,bbox={'facecolor': 'white'})
+            ax[layer_i][2].text(5,5,'E = %2.2f GeV'%(SR_image.sum()/1e3),fontsize=22,bbox={'facecolor': 'white'})
 
     plt.tight_layout()
     fig.savefig('images/SR_ev_' + str(event_number) + '.pdf')
