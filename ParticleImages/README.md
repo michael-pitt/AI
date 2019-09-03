@@ -44,6 +44,14 @@ This folder contains an implementation of Super-Resolution task on images obtain
 
 The detector images obtained a simplified version of Geant4 based ATLAS detector simulation ([mpitt82/Geant4-models/ATLAS-simplified](https://github.com/mpitt82/Geant4-models/tree/master/ATLAS-simplified)). 
 
-Example of a few simulation outputs can be found in [link].
+Example of a few simulation input files can be found in [link](https://cernbox.cern.ch/index.php/s/sdrfCk1JMkbu6x6). To produce the LR images one need to execute [Matrix2Matrix6L.cc](https://raw.githubusercontent.com/mpitt82/Geant4-models/master/ATLAS-simplified/scripts/Matrix2Matrix6L.cc)
+ and [Matrix6L2Matrix.cc](https://raw.githubusercontent.com/mpitt82/Geant4-models/master/ATLAS-simplified/scripts/Matrix6L2Matrix.cc) scripts:
+```bash
+root -l -q -b 'Matrix2Matrix6L.cc("FILENAME.root")'
+root -l -q -b 'Matrix6L2Matrix.cc("FILENAME_ATLAS_resolution_6D64x64.root")'
+```
+where the scripts can be downloaded from: 
+
+The notebook that contain event visualization, training model testing plots: [SuperResolution.ipynb](https://nbviewer.jupyter.org/github/mpitt82/AI/blob/master/ParticleImages/SuperResolution.ipynb)
 
 [:arrow_up: TOP](#outline)
