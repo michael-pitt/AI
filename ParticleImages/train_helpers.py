@@ -31,7 +31,7 @@ class SRDataLoader(Dataset):
         else:
             x = self.treeLR.array(self.br_name, entrystart=index, entrystop=index+1)
             y = self.treeHR.array(self.br_name, entrystart=index, entrystop=index+1)
-        return x, y
+        return x.squeeze(), y.squeeze()
 
     def __len__(self):
         return self.treeHR.numentries   
