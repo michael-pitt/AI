@@ -61,9 +61,9 @@ def main(args):
                         help='layer number')
     parser.add_argument('-n','--Nepoch', dest='nepoch', type=int, default=10,
                         help='number of epoch [default=%default]')
-    parser.add_argument('-bs','batchSize', dest='bs', type=int, default=64,
+    parser.add_argument('-bs','--batchSize', dest='bs', type=int, default=64,
                         help='batch size [default=%default]')
-    parser.add_argument('-lr','learningRate', dest='lr', type=float, default=0.05,
+    parser.add_argument('-lr','--learningRate', dest='lr', type=float, default=0.05,
                         help='Learning rate [default=%default]')
     parser.add_argument('-d','--device', dest='deviceN', type=int, default=0,
                         help='device number (for multiple GPUs) [default=%default]')
