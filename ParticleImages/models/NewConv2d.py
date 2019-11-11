@@ -31,7 +31,8 @@ class model(nn.Module):
                 neigh_Npix = int(LR_shapes[j_layer][0]/LR_shapes[layer_number][0])*int(LR_shapes[j_layer][1]/LR_shapes[layer_number][1])
                 weights_input_dim += neigh_Npix * np.prod(kernel_size)
             self.weight = nn.Parameter(torch.rand(weights_input_dim,self.output_dim))
-            #self.weight.data.uniform_(-0.1, 0.1)
+            std = 1. / (weights_input_dim * self.output_dim)
+            self.weight.data.uniform_(-stdv, stdv)
 			
             if debug: print('Model initialized, for L=%d, with weight matrix of size = '%layer_number,self.weight.size())
         
@@ -54,6 +55,9 @@ class model(nn.Module):
             Xunfold.append(F.unfold(input[j_layer],kernel_size=f,padding=p,stride=s))
         Xunfold = torch.cat(Xunfold,dim=1)
         out_unf = Xunfold.transpose(1, 2).matmul(self.weight)
+        
+        #apply reLU
+        out_unf = F.relu(out_unf)
         
         #apply softmax on the output dimention
         out_unf_soft = out_unf.softmax(dim=-1)
