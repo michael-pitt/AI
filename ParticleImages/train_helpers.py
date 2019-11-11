@@ -79,8 +79,8 @@ def trainMe(train_loader, model, optimizer, criterion, epochs=1000, cache={'loss
     tic = time.time()
     for epoch in range(epochs):
         for x, y in train_loader:
+            y = y.squeeze()
             if isGPU:
-                y = y.squeeze()
                 if isinstance(x,type([])):
                     x = [k.to(device) for k in x]
                 else: x = x.to(device)
