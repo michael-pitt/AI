@@ -80,7 +80,7 @@ def main(args):
     train_loader=DataLoader(dataset=train_dataset,batch_size=opt.bs ) #train_size
 
     #construct a model
-    print('Constract the model')
+    print('Construct the model')
     LR_shapes, HR_shape = ReadShapes(train_dataset)
     model = NewConv2d.model(LR_shapes, HR_shape, opt.Layer_i)
     print('model parameters = ',sum(p.numel() for p in model.parameters() if p.requires_grad))
@@ -98,11 +98,14 @@ def main(args):
     cacheSR = trainMe(train_loader, model, optimizer, criterion, opt.nepoch, cacheSR, device)
 
     #saving the model
+    outname = 'models/UNET_SR_dipion_dict_L%d.pt'%opt.Layer_i
+    print('savind the model to',outname)
     torch.save({
         'model_state_dict' : model.cpu().state_dict(),
         'cache' : cacheSR,
         },
-        'models/UNET_SR_dipion_dict_L%d.pt'%opt.Layer_i)
+        outname)
+    
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv[1:]))
