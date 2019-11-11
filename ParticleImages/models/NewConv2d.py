@@ -31,7 +31,7 @@ class model(nn.Module):
                 neigh_Npix = int(LR_shapes[j_layer][0]/LR_shapes[layer_number][0])*int(LR_shapes[j_layer][1]/LR_shapes[layer_number][1])
                 weights_input_dim += neigh_Npix * np.prod(kernel_size)
             self.weight = nn.Parameter(torch.rand(weights_input_dim,self.output_dim))
-            std = 1. / (weights_input_dim * self.output_dim)
+            stdv = 1. / (weights_input_dim * self.output_dim)
             self.weight.data.uniform_(-stdv, stdv)
 			
             if debug: print('Model initialized, for L=%d, with weight matrix of size = '%layer_number,self.weight.size())
