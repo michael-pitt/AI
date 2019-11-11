@@ -35,7 +35,37 @@ class SRDataLoader(Dataset):
 
     def __len__(self):
         return self.treeHR.numentries   
-    
+
+class SRDataLoaderLayers(Dataset):
+    def __init__(self, treeLR, treeHR, br_name='cell_Energy', nLayers=6):
+        """
+        Args:
+            treeRH,  treeLR (ROOT.TTree): tree contains HR and LR images respectively
+            treeName (string, optional): Name of the event tree
+            the LR images are list of nLayer matrixes of different size
+        """
+        self.treeLR = treeLR
+        self.treeHR = treeHR
+        self.br_name = br_name
+        self.nLayers = nLayers
+     
+    def __getitem__(self, index):
+        x=[]
+        if isinstance(index, slice):
+            for il in range(1,self.nLayers+1):
+                xi = self.treeLR.array(self.br_name+('_L%d'%il), entrystart=index.start, entrystop=index.stop)
+                x.append(xi)
+            y = self.treeHR.array(self.br_name, entrystart=index.start, entrystop=index.stop)
+        else:
+            for il in range(1,self.nLayers+1):
+                xi = self.treeLR.array(self.br_name+('_L%d'%il), entrystart=index, entrystop=index+1)
+                x.append(xi)
+            y = self.treeHR.array(self.br_name, entrystart=index, entrystop=index+1)
+        return x, y
+
+    def __len__(self):
+        return self.treeHR.numentries   
+        
 '''
 Trainer and Tester
 '''
@@ -54,7 +84,8 @@ def trainMe(train_loader, model, optimizer, criterion, epochs=1000, cache={'loss
                     x = [k.to(device) for k in x]
                 else: x = x.to(device)
                 y = y.to(device)
-            loss=criterion(model(x),y)
+            yhat = model(x)
+            loss=criterion(yhat,y)
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
@@ -62,9 +93,10 @@ def trainMe(train_loader, model, optimizer, criterion, epochs=1000, cache={'loss
         printProgressBar(epoch, epochs, loss.item())
     toc = time.time()
     print('total time: %2.2f sec' %(toc-tic))
-    print('cached',torch.cuda.memory_cached(device)/1e6,' MB')
-    torch.cuda.empty_cache() 
-    print('Cache cleaned\nRemaining cached memory',torch.cuda.memory_cached(device)/1e6,' MB')
+    if isGPU:
+        print('cached',torch.cuda.memory_cached(device)/1e6,' MB')
+        torch.cuda.empty_cache() 
+        print('Cache cleaned\nRemaining cached memory',torch.cuda.memory_cached(device)/1e6,' MB')
     return  cache
 
 def CreateCash(model):

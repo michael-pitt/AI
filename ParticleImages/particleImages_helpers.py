@@ -90,7 +90,8 @@ def DrawEventSR(data_generator, event_number, model = None, device = torch.devic
     nimage = 2
     Title = ['LR image', 'HR image',]
     if model:
-        imageHRbar = model(torch.FloatTensor(imageLR).to(device)).cpu().detach().numpy()
+        yhat = model([torch.tensor(image[None,:,:,:]) for image in imageLR])
+        imageHRbar = yhat.squeeze().to(device).cpu().detach().numpy()
         nimage = 3
         Title.append('SR image')
     
@@ -99,28 +100,31 @@ def DrawEventSR(data_generator, event_number, model = None, device = torch.devic
 
     for layer_i in range(6):
 
-        LR_image = imageLR[0][layer_i]
-        HR_image = imageHR[0][layer_i]
+        LR_image = imageLR[layer_i].squeeze()
+        HR_image = imageHR.squeeze()[layer_i]
 
-        ax[layer_i][0].imshow( LR_image, cmap='plasma', vmin=0.001, vmax=10.8 )
-        ax[layer_i][1].imshow( HR_image, cmap='plasma', vmin=0.001, vmax=10.8 )
+        ax[layer_i][0].imshow( LR_image, cmap='plasma', vmin=0.001, vmax=10.8, aspect='auto' )
+        ax[layer_i][1].imshow( HR_image, cmap='plasma', vmin=0.001, vmax=10.8, aspect='auto' )
 
-        major_ticks = np.arange(-0.5, 63.5, 1)
-        minor_ticks = np.arange(-0.5, 63.5, 1)
+        xticksLR = np.arange(0.5, LR_image.shape[1]-0.5, 1)
+        yticksLR = np.arange(-0.5, LR_image.shape[0]-0.5, 1)
+        ticksHR = np.arange(-0.5, HR_image.shape[0]-0.5, 1)
+        xticks = [xticksLR, ticksHR, ticksHR]
+        yticks = [yticksLR, ticksHR, ticksHR]
 
         ax[layer_i][0].set_ylabel(LayerNames[layer_i],fontsize=26)
         for ipad in range(nimage) : 
-            ax[layer_i][ipad].set_xticks(minor_ticks, minor=True)
-            ax[layer_i][ipad].set_yticks(minor_ticks, minor=True)
+            ax[layer_i][ipad].set_xticks(xticks[ipad], minor=True)
+            ax[layer_i][ipad].set_yticks(yticks[ipad], minor=True)
             ax[layer_i][ipad].grid(which='minor')
             ax[0][ipad].set_title(Title[ipad]+' ' , fontsize=20)     
-        ax[layer_i][0].text(5,5,'E = %2.2f GeV'%(LR_image.sum()/1e3),fontsize=26,bbox={'facecolor': 'white'})
-        ax[layer_i][1].text(5,5,'E = %2.2f GeV'%(HR_image.sum()/1e3),fontsize=26,bbox={'facecolor': 'white'})
+        ax[layer_i][0].text(LR_image.shape[1]*0.08,LR_image.shape[0]*0.08,'E = %2.2f GeV'%(LR_image.sum()/1e3),fontsize=26,bbox={'facecolor': 'white'})
+        ax[layer_i][1].text(5.12,5.12,'E = %2.2f GeV'%(HR_image.sum()/1e3),fontsize=26,bbox={'facecolor': 'white'})
         
         if model:
-            SR_image = imageHRbar[0][layer_i]
+            SR_image = imageHRbar[layer_i]
             ax[layer_i][2].imshow( SR_image, cmap='plasma', vmin=0.001, vmax=10.8 )
-            ax[layer_i][2].text(5,5,'E = %2.2f GeV'%(SR_image.sum()/1e3),fontsize=22,bbox={'facecolor': 'white'})
+            ax[layer_i][2].text(5.12,5.12,'E = %2.2f GeV'%(SR_image.sum()/1e3),fontsize=22,bbox={'facecolor': 'white'})
 
     plt.tight_layout()
     fig.savefig('images/SR_ev_' + str(event_number) + '.pdf')
