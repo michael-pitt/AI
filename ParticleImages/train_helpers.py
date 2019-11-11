@@ -80,6 +80,7 @@ def trainMe(train_loader, model, optimizer, criterion, epochs=1000, cache={'loss
     for epoch in range(epochs):
         for x, y in train_loader:
             if isGPU:
+                y = y.squeeze()
                 if isinstance(x,type([])):
                     x = [k.to(device) for k in x]
                 else: x = x.to(device)
