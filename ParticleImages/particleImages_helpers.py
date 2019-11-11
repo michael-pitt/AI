@@ -127,7 +127,7 @@ def DrawEventSR(data_generator, event_number, model = None, device = torch.devic
             ax[layer_i][2].text(5.12,5.12,'E = %2.2f GeV'%(SR_image.sum()/1e3),fontsize=22,bbox={'facecolor': 'white'})
 
     plt.tight_layout()
-    fig.savefig('images/SR_ev_' + str(event_number) + '.pdf')
-    fig.savefig('images/SR_ev_' + str(event_number) + '.png')
+    fig.savefig('images/SR_yhat_ev_' + str(event_number) + '.pdf')
+    fig.savefig('images/SR_yhat_ev_' + str(event_number) + '.png')
     plt.show()
 	
