@@ -33,7 +33,7 @@ class model(nn.Module):
             self.weight = nn.Parameter(torch.rand(weights_input_dim,self.output_dim))
             stdv = 1. / (weights_input_dim * self.output_dim)
             self.weight.data.uniform_(-stdv, stdv)
-			
+            
             if debug: print('Model initialized, for L=%d, with weight matrix of size = '%layer_number,self.weight.size())
         
     def forward(self, input):
@@ -87,4 +87,12 @@ class model(nn.Module):
         input_reshaped = input.reshape((n, 1, self.upscale_factor[0], self.upscale_factor[1], h, w))
         return input_reshaped.permute(0,1,4,2,5,3).reshape((n,1,oh,ow))        
 
-    
+#Helpers
+def ReadShapes(data_generator):
+    imageLR, imageHR = data_generator[0]
+    HR_shape = imageHR.shape[2:4]
+    LR_shapes = []
+    for i in range(len(imageLR)):
+        LR_shapes.append(imageLR[i].shape[1:3])
+    return LR_shapes, HR_shape
+   

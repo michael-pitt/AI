@@ -103,6 +103,7 @@ def main(args):
     torch.save({
         'model_state_dict' : model.cpu().state_dict(),
         'cache' : cacheSR,
+        'optimizer': optimizer.state_dict(),
         },
         outname)
     
