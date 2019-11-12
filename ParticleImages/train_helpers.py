@@ -7,6 +7,7 @@ from torch import Tensor
 import torch.nn.functional as F
 import time
 from particleImages_helpers import printProgressBar
+import GPUtil as GPU
 
 ''' 
 Data Loaders:
