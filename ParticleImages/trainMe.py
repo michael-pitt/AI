@@ -15,23 +15,8 @@ from models import NewConv2d
 from models import data_loader
 
 #helpers
-from train_helpers import trainMe, CreateCash
+from train_helpers import trainMe, CreateCash, GetDevice
 
-def PrintGPUInfo(device_number = 0):
-    use_cuda = torch.cuda.is_available()
-    print('Availability of CUDA:',use_cuda)
-    print('Availability of CUNN:',torch.backends.cudnn.enabled)
-    print('Total number of GPU devices: ',torch.cuda.device_count())
-    device = torch.device("cuda:"+str(device_number) if torch.cuda.is_available() else "cpu")
-    if use_cuda:
-        gpu = GPU.getGPUs()[0]
-        torch.cuda.set_device(device_number)
-        idevice = torch.cuda.current_device()
-        print('Will work on device number',idevice,', named: ',torch.cuda.get_device_name(idevice))
-        print("GPU RAM Free: {0:.0f}MB | Used: {1:.0f}MB | Util {2:3.0f}% | Total {3:.0f}MB".format(gpu.memoryFree/1e3, gpu.memoryUsed, gpu.memoryUtil*100, gpu.memoryTotal))
-    else: print('will run on CPU, using',torch.get_num_threads(),'cores')
-    return device
-    
 def LoadData():
     inputfileHR = 'data/events_6D64x64.root'
     inputfileLR = 'data/events_6D64x64_ATLAS_resolution.root'
@@ -71,7 +56,7 @@ def main(args):
     opt=parser.parse_args(args)
     print("Will start training for layer ",opt.Layer_i)
 
-    device = PrintGPUInfo(opt.deviceN)
+    device = GetDevice(opt.deviceN)
     
     # Load the data
     print('Load data')
