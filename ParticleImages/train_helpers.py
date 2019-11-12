@@ -139,7 +139,7 @@ def GetDevice(device_number = 0):
         torch.cuda.set_device(device_number)
         idevice = torch.cuda.current_device()
         print('Will work on device number',idevice,', named: ',torch.cuda.get_device_name(idevice))
-        print("GPU RAM Free: {0:.0f}MB | Used: {1:.0f}MB | Util {2:3.0f}% | Total {3:.0f}MB".format(gpu.memoryFree/1e3, gpu.memoryUsed, gpu.memoryUtil*100, gpu.memoryTotal))
+        print("GPU RAM Free: {0:.0f}GB | Used: {1:.0f}MB | Util {2:3.0f}% | Total {3:.0f}MB".format(gpu.memoryFree/1e3, gpu.memoryUsed, gpu.memoryUtil*100, gpu.memoryTotal))
     else: print('will run on CPU, using',torch.get_num_threads(),'cores')
     return device
 
