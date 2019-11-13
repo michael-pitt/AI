@@ -1,5 +1,5 @@
 """
-This file contains custom CNN architecture used for the Calorimeter images with varying granularity
+This file contains custom NN architecture used for the Calorimeter images with varying granularity
 author: Michael Pitt (michael.pitt@cern.ch)
 date: November 2019
 """
@@ -30,11 +30,14 @@ class model(nn.Module):
             for j_layer in range(self.nLayers):
                 neigh_Npix = int(LR_shapes[j_layer][0]/LR_shapes[layer_number][0])*int(LR_shapes[j_layer][1]/LR_shapes[layer_number][1])
                 weights_input_dim += neigh_Npix * np.prod(kernel_size)
-            self.weight = nn.Parameter(torch.rand(weights_input_dim,self.output_dim))
-            stdv = 1. / (weights_input_dim * self.output_dim)
-            self.weight.data.uniform_(-stdv, stdv)
+            middle_layer = (weights_input_dim+self.output_dim)//2
+            self.fc1 = nn.Linear(weights_input_dim, middle_layer)
+            self.fc2 = nn.Linear(middle_layer, self.output_dim)
             
-            if debug: print('Model initialized, for L=%d, with weight matrix of size = '%layer_number,self.weight.size())
+            #self.weight = nn.Parameter(torch.rand(weights_input_dim,self.output_dim))
+            #stdv = 1. / (weights_input_dim * self.output_dim)
+            #self.weight.data.uniform_(-stdv, stdv)
+            #if debug: print('Model initialized, for L=%d, with weight matrix of size = '%layer_number,self.weight.size())
         
     def forward(self, input):
         
@@ -54,13 +57,26 @@ class model(nn.Module):
             p = tuple(map(mul, self.padding, s))
             Xunfold.append(F.unfold(input[j_layer],kernel_size=f,padding=p,stride=s))
         Xunfold = torch.cat(Xunfold,dim=1)
-        out_unf = Xunfold.transpose(1, 2).matmul(self.weight)
+        
+        nevents, nWindows, hxw = Xunfold.shape[0], Xunfold.shape[1], Xunfold
+        #unfold from [Nevents , h x w, nWindows] to [nevents*h*w, nWindows]
+        Xunfold = Xunfold.transpose(1, 2).reshape(nevents*hxw,nWindows)
+        
+        #pass throught NN
+        w = F.relu(self.fc1(Xunfold))
+        w = F.relu(self.fc2(w))
+        #apply softmax to obtain probabilities
+        w = F.softmax(w,dim=1)
+        #reshape back to [Nevents , h x w, nWindows]
+        out_unf_soft = w.reshape(nevents,hxw,self.output_dim)
+        
+        #out_unf = Xunfold.transpose(1, 2).matmul(self.weight)
         
         #apply reLU
-        out_unf = F.relu(out_unf)
+        #out_unf = F.relu(out_unf)
         
-        #apply softmax on the output dimention
-        out_unf_soft = out_unf.softmax(dim=-1)
+        #apply softmax on the output dimention and reshape
+        #out_unf_soft = out_unf.softmax(dim=-1)
         out_unf_soft = out_unf_soft[:,:,:,None].transpose(2, 3)
         
         #multiply the input layer with the output weights
