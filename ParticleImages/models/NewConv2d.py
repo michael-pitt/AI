@@ -58,7 +58,7 @@ class model(nn.Module):
             Xunfold.append(F.unfold(input[j_layer],kernel_size=f,padding=p,stride=s))
         Xunfold = torch.cat(Xunfold,dim=1)
         
-        nevents, nWindows, hxw = Xunfold.shape[0], Xunfold.shape[1], Xunfold
+        nevents, nWindows, hxw = Xunfold.shape[0], Xunfold.shape[1], Xunfold.shape[2]
         #unfold from [Nevents , h x w, nWindows] to [nevents*h*w, nWindows]
         Xunfold = Xunfold.transpose(1, 2).reshape(nevents*hxw,nWindows)
         
