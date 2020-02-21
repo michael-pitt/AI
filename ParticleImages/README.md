@@ -20,7 +20,7 @@ git pull --depth=1 origin master
 ```
 
 # Data exploration notebook
-Before performing different tasks on the calorimeter images, the [data exploration notebook](https://nbviewer.jupyter.org/github/mpitt82/AI/blob/master/ParticleImages/DataExploration.ipynb)
+Before performing different tasks on the calorimeter images, the [data exploration notebook](https://nbviewer.jupyter.org/github/michael-pitt/AI/blob/master/ParticleImages/DataExploration.ipynb)
  is used to explore simulation output. In this notebook, one can find, kinematic distribution of incoming particles,
 as well as the detector's energy response. A typical image obtained from all six calorimeter layers is shown in Figure 1.
 
